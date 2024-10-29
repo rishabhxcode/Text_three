@@ -39,16 +39,20 @@ controls.enableDamping = true;
 // const boxGeometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
 
 const textureLoader = new THREE.TextureLoader();
-const matcapTexture = textureLoader.load("textures/matcaps/shiny_gold.png");
-const shapesMatcapTexture = textureLoader.load("textures/matcaps/silver.png");
-const rainbowMatcapTexture = textureLoader.load("textures/matcaps/rainbow.png");
-const crystalMatcapTexture = textureLoader.load("textures/matcaps/crystal.png");
-const blueMatcapTexture = textureLoader.load("textures/matcaps/blue.png");
+const matcapTexture = textureLoader.load("/textures/matcaps/shiny_gold.png");
+const shapesMatcapTexture = textureLoader.load("/textures/matcaps/silver.png");
+const rainbowMatcapTexture = textureLoader.load(
+  "/textures/matcaps/rainbow.png"
+);
+const crystalMatcapTexture = textureLoader.load(
+  "/textures/matcaps/crystal.png"
+);
+const blueMatcapTexture = textureLoader.load("/textures/matcaps/blue.png");
 const greenMarbelMatcapTexture = textureLoader.load(
-  "textures/matcaps/green_marble.png"
+  "/textures/matcaps/green_marble.png"
 );
 const shinyWoodMatcapTexture = textureLoader.load(
-  "textures/matcaps/shiny_wood.png"
+  "/textures/matcaps/shiny_wood.png"
 );
 matcapTexture.colorSpace = THREE.SRGBColorSpace;
 

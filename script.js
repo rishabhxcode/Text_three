@@ -39,6 +39,7 @@ controls.enableDamping = true;
 
 const textureLoader = new THREE.TextureLoader();
 const matcapTexture = textureLoader.load("./textures/matcaps/shinygold.png");
+const sunMatcapTexture = textureLoader.load("./textures/matcaps/sun.png");
 const shapesMatcapTexture = textureLoader.load("./textures/matcaps/silver.png");
 const rainbowMatcapTexture = textureLoader.load(
   "./textures/matcaps/rainbow.png"
@@ -55,10 +56,15 @@ const shinyWoodMatcapTexture = textureLoader.load(
 );
 matcapTexture.colorSpace = THREE.SRGBColorSpace;
 
+const donuts = [];
+const squares = [];
+const cylinders = [];
+const cones = [];
+
 // font Geometry
 const fontLoader = new FontLoader();
 fontLoader.load(
-  "./fonts/dancingscript.json",
+  "./fonts/pacifico.json",
   (font) => {
     // Material
     const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
@@ -80,31 +86,47 @@ fontLoader.load(
     const shinyWoodMaterial = new THREE.MeshMatcapMaterial({
       matcap: shinyWoodMatcapTexture,
     });
+    const sunMatcapMaterial = new THREE.MeshMatcapMaterial({
+      matcap: sunMatcapTexture,
+    });
 
     // Text
-    const textGeometry = new TextGeometry(
-      "Happy Diwali\n    From\nRishabh Bhardwaj",
-      {
-        font: font,
-        size: 0.5,
-        depth: 0.2,
-        curveSegments: 2,
-        bevelEnabled: true,
-        bevelThickness: 0.01, // Reduced bevel thickness to make the font thinner from sides
-        bevelSize: 0.005, // Reduced bevel size to make the font thinner from sides
-        bevelOffset: 0,
-        bevelSegments: 2,
-        align: "center", // Align text at center
-      }
-    );
+    const textGeometry = new TextGeometry("Happy Diwali\n    Team AVAZ", {
+      font: font,
+      size: 0.5,
+      depth: 0.2,
+      curveSegments: 2,
+      bevelEnabled: true,
+      bevelThickness: 0.01, // Reduced bevel thickness to make the font thinner from sides
+      bevelSize: 0.005, // Reduced bevel size to make the font thinner from sides
+      bevelOffset: 0,
+      bevelSegments: 2,
+      align: "center", // Align text at center
+    });
     textGeometry.center(); // Center the text geometry
 
     const text = new THREE.Mesh(textGeometry, material);
     scene.add(text);
 
+    const textNameGeometry = new TextGeometry("From Rishabh", {
+      font: font,
+      size: 0.1,
+      depth: 0.1,
+      curveSegments: 2,
+      bevelEnabled: true,
+      bevelThickness: 0.01,
+      bevelSize: 0.005,
+      bevelOffset: 0,
+      bevelSegments: 2,
+      align: "center",
+    });
+    const textName = new THREE.Mesh(textNameGeometry, sunMatcapMaterial);
+    textName.position.y = -2;
+    textName.position.x = 1;
+    scene.add(textName);
+
     // Donuts
     const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 32, 64);
-    // Donuts
     for (let i = 0; i < 50; i++) {
       const donut = new THREE.Mesh(donutGeometry, donutMaterial);
       donut.position.x = (Math.random() - 0.5) * 10;
@@ -114,7 +136,13 @@ fontLoader.load(
       donut.rotation.y = Math.random() * Math.PI;
       const scale = Math.random();
       donut.scale.set(scale, scale, scale);
+      donut.userData.rotationAxis = new THREE.Vector3(
+        Math.random(),
+        Math.random(),
+        Math.random()
+      ).normalize();
       scene.add(donut);
+      donuts.push(donut);
     }
 
     // Squares
@@ -129,7 +157,13 @@ fontLoader.load(
       square.rotation.y = Math.random() * Math.PI;
       const scale = Math.random();
       square.scale.set(scale, scale, scale);
+      square.userData.rotationAxis = new THREE.Vector3(
+        Math.random(),
+        Math.random(),
+        Math.random()
+      ).normalize();
       scene.add(square);
+      squares.push(square);
     }
 
     // Spheres
@@ -159,7 +193,13 @@ fontLoader.load(
       cone.rotation.y = Math.random() * Math.PI;
       const scale = Math.random();
       cone.scale.set(scale, scale, scale);
+      cone.userData.rotationAxis = new THREE.Vector3(
+        Math.random(),
+        Math.random(),
+        Math.random()
+      ).normalize();
       scene.add(cone);
+      cones.push(cone);
     }
 
     // Cylinders
@@ -174,7 +214,13 @@ fontLoader.load(
       cylinder.rotation.y = Math.random() * Math.PI;
       const scale = Math.random();
       cylinder.scale.set(scale, scale, scale);
+      cylinder.userData.rotationAxis = new THREE.Vector3(
+        Math.random(),
+        Math.random(),
+        Math.random()
+      ).normalize();
       scene.add(cylinder);
+      cylinders.push(cylinder);
     }
   },
   undefined,
@@ -208,6 +254,27 @@ renderer.render(scene, camera);
 // Animate
 const tick = () => {
   controls.update();
+
+  // Rotate donuts
+  donuts.forEach((donut) => {
+    donut.rotateOnAxis(donut.userData.rotationAxis, 0.007);
+  });
+
+  // Rotate squares
+  squares.forEach((square) => {
+    square.rotateOnAxis(square.userData.rotationAxis, 0.001);
+  });
+
+  // Rotate cylinders
+  cylinders.forEach((cylinder) => {
+    cylinder.rotateOnAxis(cylinder.userData.rotationAxis, 0.002);
+  });
+
+  // Rotate cones
+  cones.forEach((cone) => {
+    cone.rotateOnAxis(cone.userData.rotationAxis, 0.005);
+  });
+
   renderer.render(scene, camera);
   window.requestAnimationFrame(tick);
 };

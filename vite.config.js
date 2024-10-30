@@ -1,7 +1,8 @@
 import restart from "vite-plugin-restart";
 
 export default {
-  base: "/text_three/",
+  base: "../",
+  // base: "/text_three/",
   root: ".", // Sources files (typically where index.html is)
   publicDir: "./public/", // Path from "root" to static assets (files that are served as they are)
   server: {

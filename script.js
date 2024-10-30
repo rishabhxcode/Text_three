@@ -82,18 +82,22 @@ fontLoader.load(
     });
 
     // Text
-    const textGeometry = new TextGeometry("Rishabh Bhardwaj", {
-      font: font,
-      size: 0.5,
-      depth: 0.2,
-      curveSegments: 2,
-      bevelEnabled: true,
-      bevelThickness: 0.01, // Reduced bevel thickness to make the font thinner from sides
-      bevelSize: 0.005, // Reduced bevel size to make the font thinner from sides
-      bevelOffset: 0,
-      bevelSegments: 2,
-    });
-    textGeometry.center();
+    const textGeometry = new TextGeometry(
+      "Happy Diwali\n    From\nRishabh Bhardwaj",
+      {
+        font: font,
+        size: 0.5,
+        depth: 0.2,
+        curveSegments: 2,
+        bevelEnabled: true,
+        bevelThickness: 0.01, // Reduced bevel thickness to make the font thinner from sides
+        bevelSize: 0.005, // Reduced bevel size to make the font thinner from sides
+        bevelOffset: 0,
+        bevelSegments: 2,
+        align: "center", // Align text at center
+      }
+    );
+    textGeometry.center(); // Center the text geometry
 
     const text = new THREE.Mesh(textGeometry, material);
     scene.add(text);
@@ -187,7 +191,7 @@ fontLoader.load(
 // const mesh = new THREE.Mesh(boxGeometry, material);
 // scene.add(mesh);
 
-camera.position.z = 3;
+camera.position.z = 4;
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({

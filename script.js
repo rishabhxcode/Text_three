@@ -38,33 +38,23 @@ controls.enableDamping = true;
 // const boxGeometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
 
 const textureLoader = new THREE.TextureLoader();
-const matcapTexture = textureLoader.load(
-  "/text_three/textures/matcaps/shiny_gold.png"
-);
-const shapesMatcapTexture = textureLoader.load(
-  "/text_three/textures/matcaps/silver.png"
-);
-const rainbowMatcapTexture = textureLoader.load(
-  "/text_three/textures/matcaps/rainbow.png"
-);
-const crystalMatcapTexture = textureLoader.load(
-  "/text_three/textures/matcaps/crystal.png"
-);
-const blueMatcapTexture = textureLoader.load(
-  "/text_three/textures/matcaps/blue.png"
-);
+const matcapTexture = textureLoader.load("textures/matcaps/shiny_gold.png");
+const shapesMatcapTexture = textureLoader.load("textures/matcaps/silver.png");
+const rainbowMatcapTexture = textureLoader.load("textures/matcaps/rainbow.png");
+const crystalMatcapTexture = textureLoader.load("textures/matcaps/crystal.png");
+const blueMatcapTexture = textureLoader.load("textures/matcaps/blue.png");
 const greenMarbelMatcapTexture = textureLoader.load(
-  "/text_three/textures/matcaps/green_marble.png"
+  "textures/matcaps/green_marble.png"
 );
 const shinyWoodMatcapTexture = textureLoader.load(
-  "/text_three/textures/matcaps/shiny_wood.png"
+  "textures/matcaps/shiny_wood.png"
 );
 matcapTexture.colorSpace = THREE.SRGBColorSpace;
 
 // font Geometry
 const fontLoader = new FontLoader();
 fontLoader.load(
-  "/text_three/fonts/dancing_script.json",
+  "fonts/dancing_script.json",
   (font) => {
     // Material
     const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });

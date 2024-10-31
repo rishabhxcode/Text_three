@@ -91,7 +91,7 @@ fontLoader.load(
     });
 
     // Text
-    const textGeometry = new TextGeometry("Happy Diwali\n    Team AVAZ", {
+    const textGeometry = new TextGeometry("Happy Diwali", {
       font: font,
       size: 0.5,
       depth: 0.2,
